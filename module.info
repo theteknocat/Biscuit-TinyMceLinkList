@@ -1,0 +1,3 @@
+name = "TinyMceLinkList"
+description = "Provides a link-list drop-down for Tiny MCE Link Dialog with links to pages and hook to allow other modules to provide links to additional items"
+version = "1.3"

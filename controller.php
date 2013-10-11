@@ -5,10 +5,11 @@
  * object passing it an array of associative arrays, each of which contains a title and a URL.
  *
  * @package Modules
+ * @subpackage TinyMceLinkList
  * @author Peter Epp
  * @copyright Copyright (c) 2009 Peter Epp (http://teknocat.org)
  * @license GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
- * @version 2.0
+ * @version 2.0 $Id: controller.php 14305 2011-09-23 22:18:39Z teknocat $
  */
 class TinyMceLinkList extends AbstractModuleController {
 	/**
@@ -43,19 +44,19 @@ class TinyMceLinkList extends AbstractModuleController {
 		$curr_user_level = $curr_user->user_level();
 		$sorted_pages = $this->Biscuit->ExtensionNavigation()->sort_pages($pages);
 		if ($pages) {
-			$js_array = '["--- Main Menu ---",""],'.$this->Biscuit->ExtensionNavigation()->render_pages_hierarchically($sorted_pages, 0, Navigation::WITH_CHILDREN, 'modules/tiny_mce_link_list/views/js_array_list.php',array('curr_user_level' => $curr_user_level));
+			$js_array = '["««« Main Menu »»»",""],'.$this->Biscuit->ExtensionNavigation()->render_pages_hierarchically($sorted_pages, 0, Navigation::WITH_CHILDREN, 'modules/tiny_mce_link_list/views/js_array_list.php',array('curr_user_level' => $curr_user_level));
 			$other_menus = $this->Biscuit->ExtensionNavigation()->other_menus();
 			if (!empty($other_menus)) {
 				foreach ($other_menus as $menu) {
 					$other_menu_js_array = $this->Biscuit->ExtensionNavigation()->render_pages_hierarchically($sorted_pages, $menu->id(), Navigation::WITH_CHILDREN, 'modules/tiny_mce_link_list/views/js_array_list.php',array('curr_user_level' => $curr_user_level));
 					if (!empty($other_menu_js_array)) {
-						$js_array .= ',["--- '.$menu->name().' ---",""],'.$other_menu_js_array;
+						$js_array .= ',["««« '.$menu->name().' »»»",""],'.$other_menu_js_array;
 					}
 				}
 			}
 			$orphans_js_array = $this->Biscuit->ExtensionNavigation()->render_pages_hierarchically($sorted_pages, NORMAL_ORPHAN_PAGE, Navigation::WITH_CHILDREN, 'modules/tiny_mce_link_list/views/js_array_list.php',array('curr_user_level' => $curr_user_level));
 			if (!empty($orphans_js_array)) {
-				$js_array .= ',["--- Orphan Pages ---",""],'.$orphans_js_array;
+				$js_array .= ',["««« Orphan Pages »»»",""],'.$orphans_js_array;
 			}
 			return $js_array;
 		}
@@ -75,7 +76,7 @@ class TinyMceLinkList extends AbstractModuleController {
 		}
 		if (!empty($section_title)) {
 			$this->link_list .= ',
-	["--- '.$section_title.' ---",""],';
+	["««« '.$section_title.' »»»",""],';
 		}
 		else {
 			$this->link_list .= ',

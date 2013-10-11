@@ -7,7 +7,7 @@ if (!empty($pages[$current_parent_id])) {
 			$indent = count($slug_bits)-1;
 			$indent_str = str_repeat('--',$indent);
 			$page_title = $page->title();
-			$page_title = $indent_str.addslashes(H::purify_text($page->title()));
+			$page_title = $indent_str.addslashes(Crumbs::html_entity_decode(H::purify_text($page->title())));
 			if ($page->access_level() > PUBLIC_USER) {
 				$page_title .= ' ('.$page->access_level_name().' access required)';
 			}
